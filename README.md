@@ -1,3 +1,5 @@
+# Bootsrap 
+
 ## using nvm to install node's compatible version
 ```
 nvm install v5.11.1
@@ -64,4 +66,69 @@ ionic emulate android
 ionic platform add ios
 ionic emulate ios
 ```
+# TYPESCRIPT
 
+## ts builds
+
+```
+npm install tsd -g
+
+tsd init
+tsd install ionic cordova --save
+
+npm install --save-dev gulp-tsd
+npm install --save-dev gulp-typescript
+```
+
+gulpfile.js
+```
+var tsd = require('gulp-tsd');
+var typescript = require('gulp-typescript');
+
+gulp.task('tsd', function(callback) {
+  tsd({
+    command: 'reinstall',
+    config: './tsd.json',
+  }, callback);
+});
+
+gulp.task('ts', ['tsd'], function() {
+  var typescriptProject = typescript.createProject('./tsconfig.json');
+  typescriptProject.src([paths.src])
+   .pipe(typescript(typescriptProject))
+   .js.pipe(gulp.dest('www/build/'));
+});
+```
+
+tsconfig.json
+```
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "outDir": "./www/build/",
+        "rootDir": "./src",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "noResolve": true
+    },
+    "exclude": ["node_modules", "platforms", "www/build/lib"]
+}
+```
+
+## bower
+```
+npm install bower -g
+bower init
+```
+
+.bowerrc
+```
+{
+  "directory": "www/lib"
+}
+```
