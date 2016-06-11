@@ -1,0 +1,14 @@
+{
+  "name": "nuionic2",
+  "description": "nuIonic2: An Ionic project",
+  "main": "",
+  "license": "MIT",
+  "homepage": "https://github.com/kmassada/ionic2",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
