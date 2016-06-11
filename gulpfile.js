@@ -35,6 +35,38 @@ var copyScripts = require('ionic-gulp-scripts-copy');
 
 var isRelease = argv.indexOf('--release') > -1;
 
+/**
+ * Custom Builds
+ */
+var paths = {
+  sass: ['./scss/**/*.scss'],
+  src: ['./src/**/*.ts'],
+  typings: ['./typings/**.d.ts'],
+  build: ['./www/build/**/*.js'],
+  js: ['./www/build/js/**/*.js'],
+};
+
+var tsd = require('gulp-tsd');
+var typescript = require('gulp-typescript');
+
+gulp.task('tsd', function(callback) {
+  tsd({
+    command: 'reinstall',
+    config: './tsd.json',
+  }, callback);
+});
+
+gulp.task('ts', ['tsd'], function() {
+  var typescriptProject = typescript.createProject('./tsconfig.json');
+  typescriptProject.src([paths.src])
+   .pipe(typescript(typescriptProject))
+   .js.pipe(gulp.dest('build/'));
+});
+
+/**
+ * Native Builds
+ */
+
 gulp.task('watch', ['clean'], function(done){
   runSequence(
     ['sass', 'html', 'fonts', 'scripts'],
