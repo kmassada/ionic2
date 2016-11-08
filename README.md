@@ -80,6 +80,9 @@ npm install --save-dev gulp-tsd
 npm install --save-dev gulp-typescript
 ```
 
+- tsd allows us to compile tsd resources, since they are in .gitignore, this will come handing in production.
+- ts allows us to compile typscript to destination using same `tsconfig.json`, we already are able to do this via texteditor, but again, this will help at deployment.
+
 gulpfile.js
 ```
 var tsd = require('gulp-tsd');
