@@ -27,3 +27,5 @@ UserInterfaceState.xcuserstate
 
 typings/
 .vscode
+resources/android/icon/
+resources/ios/icon/
